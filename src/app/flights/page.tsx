@@ -25,7 +25,7 @@ const parseDuration = (durationStr: string): number => {
   return minutes;
 };
 
-const generateDatePrices = (baseDateStr: string, basePrice: number, currentRealPrice: number) => {
+const generateDatePrices = (baseDateStr: string, basePrice: number, currentRealPrice: number, priceCache: Record<string, number>) => {
   const baseDate = new Date(baseDateStr);
   const dates = [];
 
@@ -40,8 +40,10 @@ const generateDatePrices = (baseDateStr: string, basePrice: number, currentRealP
     // Variation +/- 20%
     const variance = (hash % 40) - 20; // -20 to +20
 
-    // Use EXACT real price for the selected date (i===0), estimated for others
-    const price = i === 0 ? currentRealPrice : Math.round(basePrice * (1 + variance / 100));
+    // Use EXACT real price for the selected date (i===0) OR from cache, else estimated
+    const price = i === 0
+      ? currentRealPrice
+      : (priceCache[dateStr] || Math.round(basePrice * (1 + variance / 100)));
 
     dates.push({
       date: date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }),
