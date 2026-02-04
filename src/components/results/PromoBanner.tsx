@@ -28,14 +28,11 @@ export function HotelPromoBanner() {
           <span className={styles.skyText}>Skyscanner</span>
         </div>
         <h3 className={styles.promoTitle}>Our hottest hotel deals</h3>
-        <p className={styles.promoDesc}>Save up to 35% on Agra stays with these top offers</p>
+        <p className={styles.promoDesc}>Save up to 35% on stays with these top offers</p>
         <button className={styles.promoBtn}>Discover a deal</button>
       </div>
       <div className={styles.promoImage}>
-        <div className={styles.discountBadge}>
-          <span className={styles.upto}>UP TO</span>
-          <span className={styles.percent}>35% off</span>
-        </div>
+
         <div className={styles.imageOverlay}></div>
         {/* Using a colored div as placeholder for image to match reference style */}
         <div className={styles.imagePlaceholder}></div>

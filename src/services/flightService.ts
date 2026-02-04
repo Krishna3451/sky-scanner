@@ -1,16 +1,11 @@
 
 import { duffel } from '@/lib/duffel';
-import { Flight } from '@/data/mockFlights';
+import { Flight, FlightSegment, SearchParams } from '@/types/flight';
+import { convertToINR, DEFAULT_CURRENCY } from '@/constants/currencies';
 
-export interface SearchParams {
-    from: string; // IATA code
-    to: string;   // IATA code
-    departDate: string; // YYYY-MM-DD
-    returnDate?: string; // YYYY-MM-DD
-    adults: number;
-    cabinClass: 'economy' | 'premium_economy' | 'business' | 'first';
-}
-
+/**
+ * Search for airports/places by query string
+ */
 export const searchAirports = async (query: string) => {
     if (!query) return [];
     try {
@@ -24,6 +19,22 @@ export const searchAirports = async (query: string) => {
     }
 };
 
+/**
+ * Get a single flight offer by ID
+ */
+export const getOfferById = async (id: string): Promise<Flight | null> => {
+    try {
+        const offer = await duffel.offers.get(id);
+        return mapDuffelOfferToFlight(offer.data);
+    } catch (error) {
+        console.error('Error fetching flight offer:', error);
+        return null;
+    }
+};
+
+/**
+ * Search for flights based on search parameters
+ */
 export const searchFlights = async (params: SearchParams): Promise<Flight[]> => {
     try {
         const slices: any[] = [
@@ -61,65 +72,19 @@ export const searchFlights = async (params: SearchParams): Promise<Flight[]> => 
     }
 };
 
+/**
+ * Map Duffel API offer to our Flight type
+ */
 function mapDuffelOfferToFlight(offer: any): Flight {
     const outboundSlice = offer.slices[0];
     const inboundSlice = offer.slices[1]; // Undefined for one-way
 
-    // Helper to process segments
-    const processSlice = (slice: any) => {
-        const segments = slice.segments;
-        const firstSegment = segments[0];
-        const lastSegment = segments[segments.length - 1];
-
-        const departureTime = new Date(firstSegment.departing_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-        const arrivalTime = new Date(lastSegment.arriving_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-
-        // Calculate total duration (simplified for now, ideally sum durations + connections)
-        // Duffel provides `duration` on the slice usually?
-        // Slice has `duration` string like "PT2H30M"
-        const duration = formatDuration(slice.duration);
-
-        return {
-            departure: {
-                time: departureTime,
-                airport: firstSegment.origin.iata_code,
-                city: firstSegment.origin.city_name || firstSegment.origin.name,
-            },
-            arrival: {
-                time: arrivalTime,
-                airport: lastSegment.destination.iata_code,
-                city: lastSegment.destination.city_name || lastSegment.destination.name,
-            },
-            duration: duration,
-            stops: segments.length - 1,
-            // Layover logic if stops > 0 (taking the first layover for simplicity if multiple)
-            layover: segments.length > 1 ? {
-                airport: segments[0].destination.iata_code,
-                duration: '1h' // Placeholder, need to calc connection time
-            } : undefined
-        };
-    };
-
     const originalPrice = parseFloat(offer.total_amount);
     const originalCurrency = offer.total_currency;
 
-    let finalPrice = originalPrice;
-    let finalCurrency = originalCurrency;
-
-    // Approximate conversion to INR if needed (since user requested "always INR")
-    if (originalCurrency !== 'INR') {
-        const rates: Record<string, number> = {
-            'GBP': 108,
-            'USD': 86,
-            'EUR': 92,
-            'AED': 23,
-        };
-
-        if (rates[originalCurrency]) {
-            finalPrice = originalPrice * rates[originalCurrency];
-            finalCurrency = 'INR';
-        }
-    }
+    // Convert price to INR using centralized currency conversion
+    const finalPrice = convertToINR(originalPrice, originalCurrency);
+    const finalCurrency = originalCurrency !== 'INR' ? DEFAULT_CURRENCY : originalCurrency;
 
     return {
         id: offer.id,
@@ -129,16 +94,111 @@ function mapDuffelOfferToFlight(offer: any): Flight {
             logo: offer.owner.logo_symbol_url,
         },
         outbound: processSlice(outboundSlice),
-        inbound: inboundSlice ? processSlice(inboundSlice) : ({} as any), // Handle one-way UI gracefully later
+        inbound: inboundSlice ? processSlice(inboundSlice) : undefined,
         price: finalPrice,
         currency: finalCurrency,
-        emissions: 'CO2 data' // Placeholder
+        emissions: offer.total_emissions_kg ? `${offer.total_emissions_kg}kg CO₂` : undefined,
     };
 }
 
+/**
+ * Process a flight slice into FlightSegment format
+ */
+function processSlice(slice: any): FlightSegment {
+    const segments = slice.segments;
+    const firstSegment = segments[0];
+    const lastSegment = segments[segments.length - 1];
+
+    const departureTime = new Date(firstSegment.departing_at).toLocaleTimeString('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    const arrivalTime = new Date(lastSegment.arriving_at).toLocaleTimeString('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+
+    const duration = formatDuration(slice.duration);
+
+    // Calculate layover duration if there are stops
+    let layover: FlightSegment['layover'] = undefined;
+    if (segments.length > 1) {
+        const connectionTime = calculateConnectionTime(
+            segments[0].arriving_at,
+            segments[1].departing_at
+        );
+        layover = {
+            airport: segments[0].destination.iata_code,
+            duration: connectionTime,
+        };
+    }
+
+    return {
+        departure: {
+            time: departureTime,
+            airport: firstSegment.origin.iata_code,
+            city: firstSegment.origin.city_name || firstSegment.origin.name,
+        },
+        arrival: {
+            time: arrivalTime,
+            airport: lastSegment.destination.iata_code,
+            city: lastSegment.destination.city_name || lastSegment.destination.name,
+        },
+        duration: duration,
+        stops: segments.length - 1,
+        layover,
+        segments: segments.map((seg: any) => ({
+            departure: {
+                time: new Date(seg.departing_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
+                airport: seg.origin.iata_code,
+                city: seg.origin.city_name || seg.origin.name,
+            },
+            arrival: {
+                time: new Date(seg.arriving_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
+                airport: seg.destination.iata_code,
+                city: seg.destination.city_name || seg.destination.name,
+            },
+            duration: formatDuration(seg.duration),
+            mkCarrier: {
+                name: seg.marketing_carrier.name,
+                code: seg.marketing_carrier.iata_code,
+                logo: seg.marketing_carrier.logo_symbol_url,
+            },
+            opCarrier: seg.operating_carrier ? {
+                name: seg.operating_carrier.name,
+                code: seg.operating_carrier.iata_code,
+            } : undefined,
+            flightNumber: seg.marketing_carrier_flight_number,
+        })),
+    };
+}
+
+/**
+ * Calculate connection time between two ISO datetime strings
+ */
+function calculateConnectionTime(arrival: string, departure: string): string {
+    const arrivalDate = new Date(arrival);
+    const departureDate = new Date(departure);
+    const diffMs = departureDate.getTime() - arrivalDate.getTime();
+    const diffMinutes = Math.floor(diffMs / (1000 * 60));
+
+    const hours = Math.floor(diffMinutes / 60);
+    const minutes = diffMinutes % 60;
+
+    if (hours > 0 && minutes > 0) {
+        return `${hours}h ${minutes}m`;
+    } else if (hours > 0) {
+        return `${hours}h`;
+    } else {
+        return `${minutes}m`;
+    }
+}
+
+/**
+ * Format ISO 8601 duration (e.g., PT2H30M) to human readable format
+ */
 function formatDuration(isoDuration: string | null): string {
     if (!isoDuration) return "";
-    // Simple ISO 8601 duration parser (e.g., PT2H30M)
     const match = isoDuration.match(/PT(\d+H)?(\d+M)?/);
     if (!match) return isoDuration;
 
@@ -146,3 +206,4 @@ function formatDuration(isoDuration: string | null): string {
     const minutes = match[2] ? match[2].replace('M', 'm') : '';
     return `${hours} ${minutes}`.trim();
 }
+

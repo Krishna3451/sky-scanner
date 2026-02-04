@@ -1,0 +1,100 @@
+.mainHeader {
+    background-color: #05203c;
+    padding-bottom: 0;
+}
+
+.headerContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.headerTopRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.logo svg {
+    height: 32px;
+    width: auto;
+}
+
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.helpBtn {
+    color: white;
+    font-size: 0.875rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.helpBtn:hover {
+    text-decoration: underline;
+}
+
+.localeSelector {
+    color: white;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.localeSelector:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.loginBtn {
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.loginBtn:hover {
+    text-decoration: underline;
+}
+
+.navTabs {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+}
+
+.navTab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.875rem;
+    font-weight: 500;
+    background: none;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.navTab:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navTab.active {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.tabIcon {
+    font-size: 1rem;
+}

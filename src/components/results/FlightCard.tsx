@@ -122,7 +122,15 @@ function FlightRow({ segment, airline, label }: FlightRowProps) {
   );
 }
 
+import { useRouter } from 'next/navigation';
+
 export default function FlightCard({ flight, isBestPrice = false }: FlightCardProps) {
+  const router = useRouter();
+
+  const handleSelect = () => {
+    router.push(`/flights/${flight.id}`);
+  };
+
   return (
     <div className={`${styles.flightCard} ${isBestPrice ? styles.bestPrice : ''}`}>
       {isBestPrice && (
@@ -145,7 +153,7 @@ export default function FlightCard({ flight, isBestPrice = false }: FlightCardPr
             <span className={styles.perPerson}>per person</span>
           </div>
 
-          <button className={styles.selectBtn}>
+          <button className={styles.selectBtn} onClick={handleSelect}>
             Select
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <polyline points="6,9 12,15 18,9" />

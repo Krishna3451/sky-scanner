@@ -1,52 +1,8 @@
-export interface FlightSegment {
-  departure: {
-    time: string;
-    airport: string;
-    city?: string;
-  };
-  arrival: {
-    time: string;
-    airport: string;
-    city?: string;
-  };
-  duration: string;
-  stops: number;
-  layover?: {
-    airport: string;
-    duration: string;
-  };
-}
+import { Flight, FlightSegment, DatePrice } from '@/types/flight';
+import { Hotel } from '@/types/hotel';
 
-export interface Flight {
-  id: string;
-  airline: {
-    name: string;
-    code: string;
-    logo?: string;
-  };
-  outbound: FlightSegment;
-  inbound?: FlightSegment;
-  price: number;
-  currency: string;
-  emissions?: string;
-}
-
-export interface Hotel {
-  id: string;
-  name: string;
-  stars: number;
-  rating: number;
-  price: number;
-  image?: string;
-}
-
-export interface DatePrice {
-  date: string;
-  dayName: string;
-  price: number;
-  fullDate?: string;
-  isCheapest?: boolean;
-}
+// Re-export types for backward compatibility
+export type { Flight, FlightSegment, DatePrice, Hotel };
 
 export const mockFlights: Flight[] = [
   {
@@ -258,15 +214,6 @@ export const mockDatePrices: DatePrice[] = [
   { date: '19 Feb', dayName: 'Wed', price: 15900 }
 ];
 
-export function formatPrice(price: number, currency: string = 'INR'): string {
-  try {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: currency,
-      maximumFractionDigits: 0,
-    }).format(price);
-  } catch (error) {
-    // Fallback if currency code is invalid
-    return `${currency} ${price.toFixed(2)}`;
-  }
-}
+// Re-export formatPrice for backward compatibility
+export { formatPrice } from '@/constants/currencies';
+

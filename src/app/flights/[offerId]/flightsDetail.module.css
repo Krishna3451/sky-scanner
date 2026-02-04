@@ -1,0 +1,766 @@
+/* Page Wrapper */
+.pageWrapper {
+    min-height: 100vh;
+    background-color: #f1f4f8;
+}
+
+/* Dark Header */
+.darkHeader {
+    background-color: #05203c;
+    color: #fff;
+    padding: 0 0 1.5rem 0;
+}
+
+.headerContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.backLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.backLink:hover {
+    opacity: 0.8;
+}
+
+.logoCenter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.logoIcon {
+    font-size: 1.2rem;
+}
+
+.saveButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.saveButton:hover {
+    opacity: 0.8;
+}
+
+.destinationInfo {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.5rem 2rem 0;
+}
+
+.destinationName {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem 0;
+}
+
+.tripMeta {
+    color: #a8c4e5;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Main Container */
+.mainContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.mainGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Loading State */
+.loadingState {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #05203c;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+/* Section Titles */
+.sectionTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #05203c;
+    margin: 0 0 1rem 0;
+}
+
+/* Booking Section (Left Column) */
+.bookingSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.readBeforeBookingWrapper {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.readBeforeBooking {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    color: #444;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.readBeforeBooking:hover {
+    background-color: #f9fafb;
+}
+
+.chevronRight {
+    margin-left: auto;
+    transition: transform 0.2s;
+}
+
+.readBeforeBookingContent {
+    padding: 0 1rem 1rem 1rem;
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.5;
+    border-top: 1px solid #f0f0f0;
+}
+
+.readBeforeBookingContent p {
+    margin: 0.75rem 0 0 0;
+}
+
+.checkFeesLink {
+    color: #0770e3;
+    text-decoration: none;
+}
+
+.checkFeesLink:hover {
+    text-decoration: underline;
+}
+
+.checkDetailsNote {
+    font-weight: 500;
+    color: #444;
+}
+
+
+.mustInclude {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.mustIncludeLabel {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.bagBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    background: #fff;
+}
+
+/* Partner Cards */
+.partnerCard {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: box-shadow 0.2s;
+}
+
+.partnerCard:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.partnerHeader {
+    margin-bottom: 0.75rem;
+}
+
+.partnerNameRow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.partnerName {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #05203c;
+}
+
+.airlineBadge {
+    background: #e8f4fd;
+    color: #0770e3;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+.partnerRating {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+}
+
+.ratingValue {
+    color: #f5a623;
+    font-weight: 600;
+}
+
+.ratingMax {
+    color: #666;
+}
+
+.reviewsLink {
+    color: #0770e3;
+    text-decoration: underline;
+    margin-left: 0.25rem;
+}
+
+.partnerFeatures {
+    margin-bottom: 1rem;
+}
+
+.featureItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #444;
+    margin-bottom: 0.35rem;
+    line-height: 1.4;
+}
+
+.featureIconCheck {
+    color: #0caa41;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.featureIconGift {
+    color: #f5a623;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.featureIconInfo {
+    color: #666;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.partnerFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.75rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+.partnerPrice {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #05203c;
+}
+
+.selectButton {
+    background-color: #05203c;
+    color: #fff;
+    border: none;
+    padding: 0.65rem 1.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.selectButton:hover {
+    background-color: #0a3a6b;
+}
+
+.moreFares {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #f0f0f0;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.moreFaresLink {
+    color: #0770e3;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: auto;
+}
+
+.moreFaresLink:hover {
+    text-decoration: underline;
+}
+
+/* Flight Details Section (Right Column) */
+.flightDetailsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.flightSummaryCard {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.outboundHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.9rem;
+}
+
+.outboundLabel {
+    font-weight: 700;
+    color: #05203c;
+}
+
+.outboundDate {
+    color: #444;
+}
+
+.localTimeNote {
+    margin-left: auto;
+    color: #888;
+    font-size: 0.8rem;
+}
+
+.flightSummaryRow {
+    display: flex;
+    align-items: center;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.flightSummaryRow:hover {
+    background-color: #f9fafb;
+}
+
+.summaryLeft {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.summaryAirlineLogo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.summaryTimes {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.summaryTime {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #05203c;
+}
+
+.summaryDuration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 140px;
+}
+
+.durationText {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+
+.durationLine {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.lineDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #05203c;
+}
+
+.lineBar {
+    flex: 1;
+    height: 2px;
+    background: #ccc;
+}
+
+.stopsIndicator {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.stopsText {
+    display: block;
+    font-size: 0.75rem;
+    color: #d1435b;
+    font-weight: 600;
+}
+
+.stopsAirports {
+    display: block;
+    font-size: 0.7rem;
+    color: #888;
+}
+
+.summaryAirports {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+    color: #666;
+    margin-left: 0.5rem;
+}
+
+.expandButton {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    color: #0770e3;
+}
+
+.operatedBy {
+    padding: 0 1.25rem 1rem;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* Expanded Details */
+.expandedDetails {
+    padding: 0 1.25rem 1.25rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+.segmentHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 0 0.5rem;
+    font-size: 0.85rem;
+    color: #444;
+}
+
+.segmentAirlineLogo {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.segmentAirlineName {
+    font-weight: 600;
+    color: #0770e3;
+}
+
+.operatedByText {
+    color: #888;
+}
+
+/* Timeline */
+.timelineItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.timelineDot {
+    position: absolute;
+    left: 0;
+    top: 0.65rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #05203c;
+    background: #fff;
+}
+
+.timelineLine {
+    position: absolute;
+    left: 4px;
+    top: -0.5rem;
+    width: 2px;
+    height: calc(100% + 1rem);
+    background: #e0e0e0;
+}
+
+.timelineContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.timelineTime {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #05203c;
+}
+
+.timelinePlace {
+    font-size: 0.85rem;
+    color: #0770e3;
+}
+
+.segmentDuration {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    color: #666;
+    margin-left: 1.5rem;
+}
+
+.segmentAmenities {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+    color: #888;
+}
+
+.showInfo {
+    color: #0770e3;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+/* Connection Badge */
+.connectionBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #fef3e7;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    margin: 0.75rem 0 0.75rem 1.5rem;
+    font-size: 0.85rem;
+}
+
+.connectionTime {
+    color: #d1435b;
+    font-weight: 700;
+}
+
+.connectionText {
+    color: #d1435b;
+}
+
+.arrivalInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.arrivesLabel {
+    color: #888;
+}
+
+.separator {
+    color: #ccc;
+}
+
+.journeyDuration {
+    font-weight: 600;
+    color: #444;
+}
+
+/* Complete Your Trip */
+.completeTrip {
+    margin-top: 1rem;
+}
+
+.completeTripTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #05203c;
+    margin: 0 0 1rem 0;
+}
+
+.hotelCard {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.hotelImagePlaceholder {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hotelEmoji {
+    font-size: 3rem;
+}
+
+.hotelContent {
+    padding: 1.25rem;
+}
+
+.hotelContent h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #05203c;
+}
+
+.hotelContent p {
+    margin: 0 0 1rem 0;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.hotelPrice {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+}
+
+.hotelPriceLabel {
+    font-size: 0.75rem;
+    color: #888;
+}
+
+.hotelPriceValue {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #05203c;
+}
+
+.hotelPriceUnit {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.exploreHotelsBtn {
+    background: #fff;
+    border: 1px solid #05203c;
+    color: #05203c;
+    padding: 0.6rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.exploreHotelsBtn:hover {
+    background: #05203c;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .mainGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .headerContent {
+        padding: 1rem;
+    }
+
+    .destinationInfo {
+        padding: 0.5rem 1rem 0;
+    }
+
+    .mainContainer {
+        padding: 1rem;
+    }
+
+    .flightDetailsSection {
+        order: -1;
+    }
+}
+
+@media (max-width: 600px) {
+    .destinationName {
+        font-size: 1.5rem;
+    }
+
+    .summaryTimes {
+        flex-wrap: wrap;
+    }
+
+    .summaryDuration {
+        min-width: 100px;
+    }
+}

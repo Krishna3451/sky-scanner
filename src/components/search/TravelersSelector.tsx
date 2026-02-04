@@ -1,148 +1,166 @@
 "use client";
 
-import { useState } from "react";
-import { Users, ChevronDown, Minus, Plus } from "lucide-react";
+import { useState, useCallback } from "react";
+import { ChevronDown, Minus, Plus } from "lucide-react";
+import { CABIN_CLASSES, CabinClass } from "@/constants/airports";
 
 interface TravelersSelectorProps {
-    onClose?: () => void;
+    adults: number;
+    children: number;
+    cabinClass: string;
+    onAdultsChange: (value: number) => void;
+    onChildrenChange: (value: number) => void;
+    onCabinChange: (value: string) => void;
+    isOpen: boolean;
+    onToggle: () => void;
+    onClose: () => void;
 }
 
-const cabinClasses = [
-    "Economy",
-    "Premium Economy",
-    "Business",
-    "First",
-];
+export default function TravelersSelector({
+    adults,
+    children,
+    cabinClass,
+    onAdultsChange,
+    onChildrenChange,
+    onCabinChange,
+    isOpen,
+    onToggle,
+    onClose,
+}: TravelersSelectorProps) {
+    const [showCabinDropdown, setShowCabinDropdown] = useState(false);
 
-export default function TravelersSelector({ onClose }: TravelersSelectorProps) {
-    const [isOpen, setIsOpen] = useState(false);
-    const [adults, setAdults] = useState(1);
-    const [children, setChildren] = useState(0);
-    const [infants, setInfants] = useState(0);
-    const [cabinClass, setCabinClass] = useState("Economy");
-
-    const totalTravelers = adults + children + infants;
-    const displayText = `${totalTravelers} ${totalTravelers === 1 ? "Adult" : "Travellers"}, ${cabinClass}`;
-
-    const CounterButton = ({
-        value,
-        onChange,
-        min = 0,
-        max = 9,
-        label,
-        sublabel,
-    }: {
-        value: number;
-        onChange: (val: number) => void;
-        min?: number;
-        max?: number;
-        label: string;
-        sublabel: string;
-    }) => (
-        <div className="flex items-center justify-between py-3 border-b border-gray-100">
-            <div>
-                <p className="text-sm font-medium text-[#161616]">{label}</p>
-                <p className="text-xs text-[#68697f]">{sublabel}</p>
-            </div>
-            <div className="flex items-center gap-3">
-                <button
-                    onClick={() => onChange(Math.max(min, value - 1))}
-                    disabled={value <= min}
-                    className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed hover:border-[#0770e3] transition-colors"
-                >
-                    <Minus className="w-4 h-4 text-[#0770e3]" />
-                </button>
-                <span className="w-6 text-center text-sm font-medium">{value}</span>
-                <button
-                    onClick={() => onChange(Math.min(max, value + 1))}
-                    disabled={value >= max}
-                    className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed hover:border-[#0770e3] transition-colors"
-                >
-                    <Plus className="w-4 h-4 text-[#0770e3]" />
-                </button>
-            </div>
-        </div>
-    );
+    const displayText = `${adults + children} ${adults + children === 1 ? "Adult" : "Travellers"
+        }, ${cabinClass}`;
 
     return (
-        <div className="relative">
+        <div className="relative flex-1">
             <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors text-left min-w-[160px]"
+                onClick={onToggle}
+                className="w-full flex items-start gap-3 px-4 py-4 hover:bg-gray-50 transition-colors text-left"
             >
-                <div className="flex-shrink-0">
-                    <Users className="w-5 h-5 text-[#68697f]" />
-                </div>
                 <div className="flex flex-col">
-                    <span className="text-xs text-[#68697f] font-medium">Travellers and cabin class</span>
-                    <div className="flex items-center gap-1">
-                        <span className="text-sm font-medium text-[#161616]">{displayText}</span>
-                        <ChevronDown className="w-4 h-4 text-[#68697f]" />
-                    </div>
+                    <span className="text-xs text-[#68697f] font-medium">
+                        Travellers and cabin class
+                    </span>
+                    <span className="text-sm font-semibold text-[#161616]">{displayText}</span>
                 </div>
             </button>
 
+            {/* Travelers Dropdown */}
             {isOpen && (
-                <>
-                    <div
-                        className="fixed inset-0 z-40"
-                        onClick={() => setIsOpen(false)}
-                    />
-                    <div className="absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-gray-100 z-50 p-4">
-                        <h3 className="text-sm font-semibold text-[#161616] mb-3">
-                            Travellers
-                        </h3>
-
-                        <CounterButton
-                            label="Adults"
-                            sublabel="16+ years"
-                            value={adults}
-                            onChange={setAdults}
-                            min={1}
-                        />
-                        <CounterButton
-                            label="Children"
-                            sublabel="1-16 years"
-                            value={children}
-                            onChange={setChildren}
-                        />
-                        <CounterButton
-                            label="Infants"
-                            sublabel="Under 1 year"
-                            value={infants}
-                            onChange={setInfants}
-                        />
-
-                        <h3 className="text-sm font-semibold text-[#161616] mt-4 mb-3">
+                <div className="absolute top-full right-0 mt-1 bg-white rounded-xl shadow-2xl border border-gray-100 z-[60] p-5 w-80">
+                    <div className="mb-4">
+                        <label className="text-sm font-semibold text-[#161616] mb-2 block">
                             Cabin class
-                        </h3>
-                        <div className="space-y-2">
-                            {cabinClasses.map((cls) => (
-                                <label
-                                    key={cls}
-                                    className="flex items-center gap-3 cursor-pointer py-2"
-                                >
-                                    <input
-                                        type="radio"
-                                        name="cabinClass"
-                                        checked={cabinClass === cls}
-                                        onChange={() => setCabinClass(cls)}
-                                        className="w-4 h-4 text-[#0770e3] focus:ring-[#0770e3]"
-                                    />
-                                    <span className="text-sm text-[#161616]">{cls}</span>
-                                </label>
-                            ))}
-                        </div>
+                        </label>
+                        <div className="relative">
+                            <button
+                                onClick={() => setShowCabinDropdown(!showCabinDropdown)}
+                                className="w-full flex items-center justify-between px-4 py-3 border border-gray-200 rounded-lg text-sm"
+                            >
+                                <span>{cabinClass}</span>
+                                <ChevronDown
+                                    className={`w-4 h-4 transition-transform ${showCabinDropdown ? "rotate-180" : ""
+                                        }`}
+                                />
+                            </button>
 
-                        <button
-                            onClick={() => setIsOpen(false)}
-                            className="w-full mt-4 py-3 bg-[#0770e3] text-white rounded-lg text-sm font-semibold hover:bg-[#0560c2] transition-colors"
-                        >
-                            Done
-                        </button>
+                            {showCabinDropdown && (
+                                <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-100 z-[70] py-1">
+                                    {CABIN_CLASSES.map((cls) => (
+                                        <button
+                                            key={cls}
+                                            onClick={() => {
+                                                onCabinChange(cls);
+                                                setShowCabinDropdown(false);
+                                            }}
+                                            className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 ${cabinClass === cls
+                                                    ? "text-[#0770e3] font-medium"
+                                                    : "text-[#161616]"
+                                                }`}
+                                        >
+                                            {cls}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     </div>
-                </>
+
+                    <CounterRow
+                        label="Adults"
+                        sublabel="Aged 18+"
+                        value={adults}
+                        onChange={onAdultsChange}
+                        min={1}
+                        max={9}
+                    />
+
+                    <CounterRow
+                        label="Children"
+                        sublabel="Aged 0 to 17"
+                        value={children}
+                        onChange={onChildrenChange}
+                        min={0}
+                        max={9}
+                    />
+
+                    <div className="mt-3 pt-3 border-t border-gray-100">
+                        <p className="text-xs text-[#68697f] leading-relaxed">
+                            Your age at time of travel must be valid for the age category booked.
+                            Airlines have restrictions on under 18s travelling alone.
+                        </p>
+                        <p className="text-xs text-[#68697f] leading-relaxed mt-2">
+                            Age limits and policies for travelling with children may vary so
+                            please check with the airline before booking.
+                        </p>
+                    </div>
+
+                    <button
+                        onClick={onClose}
+                        className="w-full mt-4 py-3 bg-[#0770e3] text-white rounded-lg text-sm font-semibold hover:bg-[#0560c2] transition-colors"
+                    >
+                        Apply
+                    </button>
+                </div>
             )}
+        </div>
+    );
+}
+
+interface CounterRowProps {
+    label: string;
+    sublabel: string;
+    value: number;
+    onChange: (value: number) => void;
+    min: number;
+    max: number;
+}
+
+function CounterRow({ label, sublabel, value, onChange, min, max }: CounterRowProps) {
+    return (
+        <div className="flex items-center justify-between py-3">
+            <div>
+                <p className="text-sm font-semibold text-[#161616]">{label}</p>
+                <p className="text-xs text-[#68697f]">{sublabel}</p>
+            </div>
+            <div className="flex items-center gap-2">
+                <button
+                    onClick={() => onChange(Math.max(min, value - 1))}
+                    disabled={value <= min}
+                    className="w-8 h-8 rounded-md bg-gray-100 flex items-center justify-center disabled:opacity-40 hover:bg-gray-200 transition-colors"
+                >
+                    <Minus className="w-4 h-4 text-[#161616]" />
+                </button>
+                <span className="w-6 text-center text-sm font-semibold">{value}</span>
+                <button
+                    onClick={() => onChange(Math.min(max, value + 1))}
+                    disabled={value >= max}
+                    className="w-8 h-8 rounded-md bg-[#0770e3] flex items-center justify-center disabled:opacity-40 hover:bg-[#0560c2] transition-colors"
+                >
+                    <Plus className="w-4 h-4 text-white" />
+                </button>
+            </div>
         </div>
     );
 }
