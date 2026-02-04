@@ -1,0 +1,284 @@
+/* ============================================
+   FLIGHTS RESULTS PAGE - SKYSCANNER CLONE
+   ============================================ */
+
+/* Header */
+.mainHeader {
+    background: var(--color-navy);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.headerContent {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.headerTopRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logoIcon {
+    font-size: 24px;
+}
+
+.logoText {
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+}
+
+.navTabs {
+    display: flex;
+    gap: 4px;
+}
+
+.navTab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.navTab:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.navTab.active {
+    background: var(--color-blue);
+    color: white;
+}
+
+.tabIcon {
+    font-size: 16px;
+}
+
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.helpBtn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.helpBtn:hover {
+    text-decoration: underline;
+}
+
+.localeSelector {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.loginBtn {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.loginBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Search Bar */
+.searchBarWrapper {
+    background: var(--color-navy);
+    padding: 0 24px 16px;
+}
+
+.searchBar {
+    display: flex;
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.searchField {
+    flex: 1;
+    padding: 12px 16px;
+    background: transparent;
+    border: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    color: white;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.searchField:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.searchField.route {
+    flex: 2;
+}
+
+.searchBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    background: var(--color-green);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.searchBtn:hover {
+    background: #009488;
+}
+
+/* Page Container */
+.flightsPage {
+    min-height: 100vh;
+    background: var(--color-gray-100);
+}
+
+/* Results Container */
+.resultsContainer {
+    display: flex;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+/* Results Main */
+.resultsMain {
+    flex: 1;
+    min-width: 0;
+}
+
+.resultsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.resultsCount {
+    font-size: 14px;
+    color: var(--color-gray-500);
+}
+
+.viewAll {
+    font-size: 14px;
+    color: var(--color-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.viewAll:hover {
+    text-decoration: underline;
+}
+
+.flightList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.showMoreBtn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 16px;
+    background: white;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 10px;
+    color: var(--color-navy);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.showMoreBtn:hover {
+    border-color: var(--color-navy);
+    background: var(--color-gray-100);
+}
+
+.searchLoading {
+    background: var(--color-navy);
+    color: white;
+    padding: 16px;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .resultsContainer {
+        padding: 20px 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navTabs {
+        display: none;
+    }
+
+    .headerActions {
+        gap: 12px;
+    }
+
+    .helpBtn,
+    .localeSelector {
+        display: none;
+    }
+
+    .searchBar {
+        flex-wrap: wrap;
+    }
+
+    .searchField {
+        flex: 1 1 50%;
+    }
+
+    .searchField.route {
+        flex: 1 1 100%;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+}

@@ -1,0 +1,283 @@
+/* Flight Card Styles */
+.flightCard {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--color-gray-200);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+}
+
+.flightCard:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.bestPrice {
+    border: 2px solid var(--color-price-green);
+}
+
+.bestBadge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--color-price-green);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-bottom-right-radius: 12px;
+    z-index: 10;
+}
+
+.cardContent {
+    display: flex;
+    padding: 20px;
+}
+
+.cardLeft {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-right: 1px solid var(--color-gray-200);
+    padding-right: 20px;
+}
+
+.cardRight {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-left: 20px;
+    position: relative;
+}
+
+/* Flight Row */
+.flightRow {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.rowLabel {
+    display: none;
+    /* Hidden on desktop, shown on mobile if needed */
+}
+
+.airlineLogo {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.airlineLogoImg {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.timeBlock {
+    display: flex;
+    flex-direction: column;
+    min-width: 80px;
+}
+
+.time {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-navy);
+}
+
+.airport {
+    font-size: 14px;
+    color: var(--color-gray-500);
+}
+
+.pathBlock {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 16px;
+}
+
+.duration {
+    font-size: 13px;
+    color: var(--color-gray-500);
+    margin-bottom: 4px;
+}
+
+.pathLine {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.lineContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.line {
+    flex: 1;
+    height: 2px;
+    background: var(--color-gray-300);
+    margin: 0 4px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid var(--color-gray-400);
+    background: white;
+}
+
+.stopDots {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 12px;
+    background: white;
+    padding: 0 4px;
+}
+
+.stopDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-gray-400);
+}
+
+.stops {
+    font-size: 13px;
+    color: #d14134;
+    /* Red for stops */
+}
+
+.stops.direct {
+    color: var(--color-green);
+    /* Green for direct */
+}
+
+.layoverInfo {
+    color: var(--color-gray-500);
+}
+
+/* Price Section */
+.priceSection {
+    text-align: right;
+    margin-top: 40px;
+}
+
+.price {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-navy);
+    line-height: 1;
+}
+
+.price.best {
+    color: var(--color-price-green);
+}
+
+.perPerson {
+    font-size: 12px;
+    color: var(--color-gray-500);
+}
+
+.selectBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: #05203C;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+    justify-content: center;
+}
+
+.selectBtn:hover {
+    background: #154679;
+}
+
+.ecoBadge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--color-green);
+    margin-top: 8px;
+}
+
+.heartBtn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    color: var(--color-gray-400);
+    cursor: pointer;
+    padding: 4px;
+    z-index: 20;
+}
+
+.heartBtn:hover {
+    color: var(--color-price-green);
+}
+
+@media (max-width: 768px) {
+    .cardContent {
+        flex-direction: column;
+    }
+
+    .cardLeft {
+        border-right: none;
+        border-bottom: 1px solid var(--color-gray-200);
+        padding-right: 0;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+    }
+
+    .cardRight {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        padding-left: 0;
+    }
+
+    .priceSection {
+        margin-top: 0;
+        text-align: left;
+    }
+
+    .selectBtn {
+        width: auto;
+    }
+
+    .heartBtn {
+        top: auto;
+        bottom: 20px;
+        right: 20px;
+    }
+}

@@ -1,0 +1,181 @@
+/* Like Banner */
+.likeBanner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--color-gray-200);
+    padding: 16px 24px;
+    margin: 12px 0;
+}
+
+.likeContent {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.iconWrapper {
+    width: 40px;
+    height: 40px;
+    background: #f0f4f9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.likeIcon {
+    font-size: 20px;
+}
+
+.bannerTitle {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin: 0;
+}
+
+.bannerDesc {
+    font-size: 14px;
+    color: var(--color-gray-500);
+    margin: 2px 0 0;
+}
+
+.trackBtn {
+    padding: 10px 20px;
+    background: var(--color-gray-100);
+    border: none;
+    border-radius: 8px;
+    color: var(--color-navy);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.trackBtn:hover {
+    background: var(--color-gray-200);
+}
+
+/* Hotel Promo */
+.hotelPromo {
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--color-gray-200);
+    overflow: hidden;
+    margin: 12px 0;
+}
+
+.promoContent {
+    padding: 24px;
+    flex: 1;
+}
+
+.skyLogo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.skyText {
+    font-weight: 700;
+    color: var(--color-blue);
+    font-size: 14px;
+}
+
+.promoTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin: 0 0 8px;
+}
+
+.promoDesc {
+    font-size: 14px;
+    color: var(--color-gray-500);
+    margin: 0 0 20px;
+    max-width: 300px;
+}
+
+.promoBtn {
+    padding: 10px 20px;
+    background: var(--color-navy);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.promoBtn:hover {
+    background: var(--color-gray-800);
+}
+
+.promoImage {
+    width: 200px;
+    position: relative;
+    background: #e5e7eb;
+}
+
+.imagePlaceholder {
+    width: 100%;
+    height: 100%;
+    background-image: url("/offer.webp");
+    background-size: cover;
+    background-position: center;
+}
+
+.discountBadge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+}
+
+.upto {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--color-blue);
+    letter-spacing: 0.5px;
+}
+
+.percent {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--color-blue);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .likeBanner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .trackBtn {
+        width: 100%;
+    }
+
+    .hotelPromo {
+        flex-direction: column;
+    }
+
+    .promoImage {
+        width: 100%;
+        height: 150px;
+    }
+}

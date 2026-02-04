@@ -1,0 +1,215 @@
+/* Hotel Deals */
+.hotelDeals {
+    margin-top: 40px;
+}
+
+.dealsTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin-bottom: 20px;
+}
+
+.filterTabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.filterTab {
+    padding: 8px 16px;
+    background: white;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 20px;
+    font-size: 14px;
+    color: var(--color-gray-600);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.filterTab:hover {
+    background: var(--color-gray-100);
+    border-color: var(--color-gray-300);
+}
+
+.filterTab.active {
+    background: var(--color-navy);
+    color: white;
+    border-color: var(--color-navy);
+}
+
+.hotelGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.hotelCard {
+    display: flex;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--color-gray-200);
+    overflow: hidden;
+    height: 160px;
+}
+
+.imageContainer {
+    width: 200px;
+    flex-shrink: 0;
+    background: #e5e7eb;
+}
+
+.hotelImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.placeholderImage {
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect fill='%23e2e8f0' x='0' y='0' width='100' height='100'/%3E%3Cpath fill='%23cbd5e0' d='M20 80 L50 40 L80 80 Z'/%3E%3Ccircle fill='%23edf2f7' cx='70' cy='30' r='10'/%3E%3C/svg%3E");
+    background-size: cover;
+    background-position: center;
+}
+
+.cardContent {
+    flex: 1;
+    display: flex;
+    padding: 16px 20px;
+    justify-content: space-between;
+}
+
+.hotelInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hotelName {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin: 0 0 4px;
+}
+
+.stars {
+    color: #ffb700;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.ratingInfo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.ratingScore {
+    background: var(--color-navy);
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 4px 6px;
+    border-radius: 4px;
+}
+
+.ratingText {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-navy);
+}
+
+.reviewCount {
+    font-size: 13px;
+    color: var(--color-gray-500);
+}
+
+.priceInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    text-align: right;
+    min-width: 120px;
+}
+
+.price {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-navy);
+}
+
+.perNight {
+    font-size: 11px;
+    color: var(--color-gray-500);
+}
+
+.viewBtn {
+    padding: 8px 16px;
+    background: var(--color-navy);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.viewBtn:hover {
+    background: var(--color-gray-800);
+}
+
+.exploreBtn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    background: var(--color-gray-200);
+    border: none;
+    border-radius: 8px;
+    color: var(--color-navy);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.exploreBtn:hover {
+    background: var(--color-gray-300);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hotelCard {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .imageContainer {
+        width: 100%;
+        height: 160px;
+    }
+
+    .cardContent {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .priceInfo {
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        border-top: 1px solid var(--color-gray-200);
+        padding-top: 16px;
+    }
+
+    .ratingInfo {
+        margin-top: 8px;
+    }
+}

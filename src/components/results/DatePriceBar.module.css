@@ -1,0 +1,165 @@
+/* Date Price Bar */
+.datePriceBar {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 12px 20px;
+    gap: 12px;
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.navBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-navy);
+    cursor: pointer;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.navBtn:hover {
+    background: var(--color-gray-100);
+}
+
+.chartBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 8px;
+    background: white;
+    color: var(--color-navy);
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+
+.chartBtn:hover {
+    border-color: var(--color-blue);
+    color: var(--color-blue);
+}
+
+.divider {
+    width: 1px;
+    height: 32px;
+    background: var(--color-gray-200);
+    margin: 0 12px;
+}
+
+.flexibleBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0 8px;
+    color: var(--color-navy);
+}
+
+.flexibleIcon {
+    margin-bottom: 2px;
+}
+
+.flexibleText {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-navy);
+}
+
+.flexibleBtn:hover .flexibleText,
+.flexibleBtn:hover {
+    color: var(--color-blue);
+}
+
+.datesContainer {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    gap: 4px;
+    overflow: hidden;
+}
+
+.dateItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 110px;
+}
+
+.dateItem:hover:not(.selected) {
+    background: var(--color-gray-100);
+}
+
+.dateItem.selected {
+    background: var(--color-navy);
+}
+
+.dateLabel {
+    font-size: 13px;
+    color: var(--color-gray-500);
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.dateItem.selected .dateLabel {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.price {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-navy);
+}
+
+.dateItem.selected .price {
+    color: white;
+}
+
+.price.cheapest {
+    color: var(--color-price-green);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .dateItem {
+        min-width: 90px;
+        padding: 10px 12px;
+    }
+
+    .dateLabel {
+        font-size: 12px;
+    }
+
+    .price {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 640px) {
+    .datesContainer {
+        overflow-x: auto;
+        justify-content: flex-start;
+    }
+
+    .dateItem {
+        min-width: 80px;
+    }
+}
